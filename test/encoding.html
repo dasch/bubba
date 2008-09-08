@@ -6,23 +6,18 @@
     <script type="text/javascript" src="/test/mootools.js"></script>
     <script type="text/javascript" src="/lib/bubba.js"></script>
     <script type="text/javascript">
-      function assertEncodesAs(id, expected, obj) {
-        var actual = Bubba.encode(obj);
-        var result = actual == expected ? "passed" : "failed";
-
+      function assert(id, condition, message) {
         var row = new Element('tr');
         var heading = new Element('th');
         var value = new Element('td');
         var comment = new Element('td');
 
-        row.set('class', result); 
+        var result = condition ? "passed" : "failed";
 
+        row.set('class', result); 
         heading.set('text', id);
         value.set('text', result);
-
-        if (actual != expected) {
-          comment.set('html', "expected <q>" + expected + "</q>, but got <q>" + actual + "</q>");
-        }
+        comment.set('html', message);
 
         heading.inject(row);
         value.inject(row);
@@ -31,8 +26,27 @@
         row.inject($('testResults'));
       }
 
+      function assertEncodesAs(id, expected, obj) {
+        var actual = Bubba.encode(obj);
+        var message = null;
+
+        if (actual != expected) {
+          message = "expected <q>" + expected + "</q>, but got <q>" + actual + "</q>";
+        }
+
+        assert(id, actual == expected, message);
+      }
+
+      function assertThrows(id, obj) {
+        try {
+          Bubba.encode(obj);
+          assert(id, false, "expected " + obj + " to cause an exception, but it didn't");
+        } catch (e) {
+          assert(id, true);
+        }
+      }
+
       window.addEvent('domready', function() {
-          if (3 instanceof Number) { alert("FOO"); }
           assertEncodesAs("integers", "i42e", 42);
           assertEncodesAs("negative integers", "i-42e", -42);
           assertEncodesAs("strings", "6:foobar", "foobar");
@@ -43,6 +57,8 @@
           assertEncodesAs("empty dictionaries", "de", {});
           assertEncodesAs("simple dictionaries", "d3:fooi42ee", {foo: 42});
           assertEncodesAs("dictionaries", "d3:fooi42e3:bari12ee", {foo: 42, bar: 12});
+          assertThrows("throws on decimal number", 4.6);
+          assertThrows("throws on boolean", true);
       });
     </script>
   </head>
