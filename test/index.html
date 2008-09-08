@@ -34,7 +34,18 @@
           message = "expected <q>" + expected + "</q>, but got <q>" + actual + "</q>";
         }
 
-        assert(id, actual == expected, message);
+        assert("encode: " + id, actual == expected, message);
+      }
+
+      function assertDecodesAs(id, expected, str) {
+        var actual = Bubba.decode(str);
+        var message = null;
+
+        if (actual != expected) {
+          message = "expected <q>" + expected + "</q>, but got <q>" + actual + "</q>";
+        }
+
+        assert("decode: " + id, actual == expected, message);
       }
 
       function assertThrows(id, obj) {
@@ -58,8 +69,8 @@
           assertEncodesAs("empty dictionaries", "de", {});
           assertEncodesAs("simple dictionaries", "d3:fooi42ee", {foo: 42});
           assertEncodesAs("dictionaries", "d3:fooi42e3:bari12ee", {foo: 42, bar: 12});
-          assertThrows("throws on decimal number", 4.6);
-          assertThrows("throws on boolean", true);
+          assertThrows("encode: throws on decimal number", 4.6);
+          assertThrows("encode: throws on boolean", true);
       });
     </script>
   </head>
