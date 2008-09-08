@@ -4,10 +4,10 @@
     <title>Test of bencode-js &ndash; encoding</title>
     <link rel="stylesheet" type="text/css" href="/test/test.css" />
     <script type="text/javascript" src="/test/mootools.js"></script>
-    <script type="text/javascript" src="/lib/bencode.js"></script>
+    <script type="text/javascript" src="/lib/bubba.js"></script>
     <script type="text/javascript">
       function assertEncodesAs(id, expected, obj) {
-        var actual = Bencode.encode(obj);
+        var actual = Bubba.encode(obj);
         var result = actual == expected ? "passed" : "failed";
 
         var row = new Element('tr');
