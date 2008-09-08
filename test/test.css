@@ -1,0 +1,28 @@
+
+body {
+	background-color: #222;
+	color: #EEE;
+}
+
+h1 {
+	font-family: "Calibri", sans-serif;
+}
+
+table {
+	margin: 0 40px;
+	border-collapse: collapse;
+	font-family: "Monaco", "Consolas", monospace;
+}
+
+th, td {
+	padding: 2px 10px;
+	text-align: left;
+}
+
+tr.passed th, tr.passed td {
+	background-color: green;
+}
+
+tr.failed th, tr.failed td {
+	background-color: red;
+}
