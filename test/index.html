@@ -71,6 +71,10 @@
           assertEncodesAs("dictionaries", "d3:fooi42e3:bari12ee", {foo: 42, bar: 12});
           assertThrows("encode: throws on decimal number", 4.6);
           assertThrows("encode: throws on boolean", true);
+
+          assertDecodesAs("integers", 42, "i42e");
+          assertDecodesAs("negative integers", -42, "i-42e");
+          assertDecodesAs("lists of integers", [1, 2, 3], "li1ei2ei3ee");
       });
     </script>
   </head>
