@@ -19,10 +19,22 @@ th, td {
 	text-align: left;
 }
 
-tr.passed th, tr.passed td {
-	background-color: green;
+tr + tr th {
+	border-top: 1px dotted #333;
 }
 
-tr.failed th, tr.failed td {
-	background-color: red;
+tr + tr td {
+	border-top: 1px dotted #666;
+}
+
+th {
+	background-color: #444;
+}
+
+tr.passed td {
+	background-color: #282;
+}
+
+tr.failed td {
+	background-color: #822;
 }
